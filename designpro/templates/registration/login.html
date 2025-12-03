@@ -1,0 +1,52 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="login-container">
+  <div class="login-header">
+    <h2>Daily UI</h2>
+    <div class="login-links">
+      <a href="#">Login</a>
+      <a href="#">Sign up</a>
+    </div>
+  </div>
+
+  <form method="post" class="login-form">
+    {% csrf_token %}
+
+    <div class="input-group">
+      <label for="{{ form.username.id_for_label }}">
+        <i class="fas fa-envelope"></i> 
+      </label>
+      {{ form.username }}
+    </div>
+
+    <div class="input-group">
+      <label for="{{ form.password.id_for_label }}">
+        <i class="fas fa-lock"></i> 
+      </label>
+      {{ form.password }}
+    </div>
+
+    <button type="submit" class="login-button">
+      Enter <i class="fas fa-arrow-right"></i>
+    </button>
+
+    {% if form.errors %}
+    <div class="error-message">
+      {% for field in form %}
+      {% for error in field.errors %}
+      <p>{{ error }}</p>
+      {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+      <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </form>
+
+  <div class="login-footer">
+    <p>Made by the dudes behind Noon Pacific.<br>Inspired by Paul Nechita.</p>
+  </div>
+</div>
+{% endblock content %}
