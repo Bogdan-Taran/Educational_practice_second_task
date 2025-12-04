@@ -2,3 +2,12 @@ Superuser/admin
 
 Bogdan
 usefulDjango
+
+Egormur
+yesyes123
+
+Sanich
+h&m12345
+
+Olesya
+firstChild45

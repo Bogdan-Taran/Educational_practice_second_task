@@ -22,18 +22,14 @@
         <div class="nav-right">
           <a href="{% url 'new-order' %}">+ New Order</a>
         </div>
-        <p>Hi {{ user.username }}!</p>
-        {% else %}
-        <div class="login-item">
-        <p>You are not logged in.</p>
-        <a href="{% url 'login' %}">Log In</a>
-        </div>
+        
+        
         {% endif %}
       </div>
     </header>
 
     {% block content %}
-    <h1>Главная страница</h1>
+    
     {% endblock content %}
   </div>
 </body>

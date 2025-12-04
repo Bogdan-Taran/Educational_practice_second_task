@@ -1,6 +1,19 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>Карточки заказов</h1>
+{% if user.is_authenticated %}
+<div class="column-item">
+    <p>Hi {{ user.username }}!</p>
+    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Выйти</button>
+    </form>
+</div>
+{% else %}
+<div class="column-item">
+    <p>You are not logged in.</p>
+    <a href="{% url 'login' %}">Log In</a>
+</div>
+{% endif %}
 
 {% endblock %}
