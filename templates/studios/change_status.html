@@ -1,0 +1,53 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Изменить статус заявки: "{{ application.title }}"</h2>
+  <p><strong>Описание:</strong> {{ application.description|truncatechars:100 }}</p>
+  <p><strong>Текущий статус:</strong> {{ application.get_status_display }}</p>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="status" class="form-label">Новый статус:</label>
+      <select name="status" id="status" class="form-select" required>
+        <option value="" disabled selected>Выберите статус</option>
+        <option value="in_progress">Принято в работу</option>
+        <option value="completed">Выполнено</option>
+      </select>
+    </div>
+
+    <div class="mb-3" id="comment-group" style="display: none;">
+      <label for="comment" class="form-label">Комментарий:</label>
+      <textarea name="comment" id="comment" class="form-control" rows="3" placeholder="Введите комментарий"></textarea>
+    </div>
+
+    <div class="mb-3" id="image-group" style="display: none;">
+      <label for="image_design" class="form-label">Изображение дизайна:</label>
+      <input type="file" name="image_design" id="image_design" class="form-control" accept="image/*" />
+      <div class="form-text">Форматы: jpg, jpeg, png, bmp. Макс. 2Мб.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    <a href="{% url 'admin_applications' %}" class="btn btn-secondary">Отмена</a>
+  </form>
+</div>
+
+<script>
+document.getElementById('status').addEventListener('change', function() {
+    const commentGroup = document.getElementById('comment-group');
+    const imageGroup = document.getElementById('image-group');
+
+    if (this.value === 'in_progress') {
+        commentGroup.style.display = 'block';
+        imageGroup.style.display = 'none';
+    } else if (this.value === 'completed') {
+        commentGroup.style.display = 'none';
+        imageGroup.style.display = 'block';
+    } else {
+        commentGroup.style.display = 'none';
+        imageGroup.style.display = 'none';
+    }
+});
+</script>
+{% endblock %}
