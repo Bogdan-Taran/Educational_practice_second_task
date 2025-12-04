@@ -69,7 +69,7 @@ class ApplicationForm(forms.ModelForm):
         }
 
     def clean_image_plan(self):
-        image = self.cleaned_file.get('image_plan')
+        image = self.cleaned_data.get('image_plan')
         if image:
             if image.size > 2 * 1024 * 1024:
                 raise forms.ValidationError('Размер файла превышает 2 МБ.')
@@ -78,3 +78,25 @@ class ApplicationForm(forms.ModelForm):
             if ext not in ['.jpg', '.jpeg', '.png', '.bmp']:
                 raise forms.ValidationError('Неподдерживаемый формат файла. Разрешены: jpg, jpeg, png, bmp.')
         return image
+
+
+
+# ------------ Admin ------------
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите название категории'}),
+        }
+        labels = {
+            'name': 'Название категории',
+        }
+
+    def clean_name(self):
+        name = self.cleaned_data['name'].strip()
+        if Category.objects.filter(name__iexact=name).exists():
+            raise forms.ValidationError('Категория с таким названием уже существует.')
+        return name
+

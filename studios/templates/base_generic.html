@@ -20,8 +20,12 @@
         </div>
         {% if user.is_authenticated %}
         <div class="nav-right">
-          <a href="{% url 'create_application' %}">+ New Order</a>
+          <a href="{% url 'my_applications' %}">Посмотреть все заявки</a>
         </div>
+        <div class="nav-right">
+          <a href="{% url 'create_application' %}">Новая заявка</a>
+        </div>
+
         
         
         {% endif %}

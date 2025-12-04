@@ -5,8 +5,8 @@
   <div class="login-header">
     <h2>Design PRO</h2>
     <div class="login-links">
-      <p>Do not have an account?</p>
-      <a href="{% url 'signup' %}">Sign up</a>
+      <p>Ещё нет аккаунта?</p>
+      <a href="{% url 'signup' %}">Зарегаться</a>
     </div>
   </div>
 
@@ -14,12 +14,12 @@
     {% csrf_token %}
 
     <div class="input-group">
-      <label for="{{ form.username.id_for_label }}">Username</label>
+      <label for="{{ form.username.id_for_label }}">Логин</label>
       {{ form.username }}
     </div>
 
     <div class="input-group">
-      <label for="{{ form.password.id_for_label }}">Password</label>
+      <label for="{{ form.password.id_for_label }}">Пароль</label>
       {{ form.password }}
     </div>
 
@@ -41,8 +41,9 @@
     {% endif %}
   </form>
 
-  <div class="login-footer">
-    <p>Turning your thoughts into reality</p>
+  <div class="login-footer login-links">
+    <p>А вы админ?</p>
+    <a href="{% url 'manage_categories' %}">Да</a>
   </div>
 </div>
 {% endblock content %}

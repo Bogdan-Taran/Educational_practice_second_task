@@ -1,4 +1,6 @@
 Superuser/admin
+admin
+admin
 
 Bogdan
 usefulDjango
