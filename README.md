@@ -53,3 +53,29 @@ python manage.py runserver 8089
 ```
 
 All users and their login information are located in the file Users.txt
+
+
+
+If you suddenly have problems with migrations and databases, then do this
+
+*Drop databse*
+```bash
+del db.sqlite3
+```
+*Delete migrations*
+```bash
+del snippets\migrations\0*.py
+```
+*Create new migrations*
+```bash
+python manage.py makemigrations snippets
+```
+*Apply migrations*
+```bash
+python manage.py migrate
+```
+
+*Create superuser*
+```bash
+python manage.py createsuperuser
+```
