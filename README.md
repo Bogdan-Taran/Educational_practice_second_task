@@ -1,20 +1,55 @@
-Create venv
+#Check Python
+*Windows*
+```bash
+python --version
+```
+*Ubuntu*
+```bash
+python3 --version
+```
+```bash
+sudo apt update && sudo apt install python3 python3-pip python3-venv -y
+```
+
+
+
+#Create venv
+*Win*
 ``` bash
 python -m venv env
 ```
-
-To activate venv
+*Ubuntu*
 ``` bash
-env/Scripts/activate
+python3 -m venv env
 ```
 
-Download packages:
+
+
+#Activate venv
+*Win*
+``` bash
+env\Scripts\activate.bat
+```
+*Ubuntu*
+```bash
+source venv/bin/activate
+```
+
+
+#Download all packages:
+*Win, ubuntu*
 ```bash
 pip install -r requirements.txt
 ```
+#Check Django
+```bash
+python -m django --version
+```
 
-Run server
+
+#Run server on different port 
 ```bash
 python manage.py runserver 8089
 ```
 
+All users and their login information are located in the file Users.txt
