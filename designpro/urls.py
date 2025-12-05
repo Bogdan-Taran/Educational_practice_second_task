@@ -7,21 +7,22 @@ from studios.views import registration
 from studios import views as studios_views
 
 urlpatterns = [
-    path('superadmin/', admin.site.urls,),
-    path('admin/', RedirectView.as_view(url='/superadmin/', permanent=True)),
-    path('accounts/', include('django.contrib.auth.urls')), 
+    path('admin/', admin.site.urls),
+    # path('admin/', RedirectView.as_view(url='/superadmin/', permanent=True)),
 
+
+    path('accounts/', include('django.contrib.auth.urls')), 
+    
     path('user/registration/', registration, name='signup'),
     path('studios/', include('studios.urls')),
-    
     path('', RedirectView.as_view(url='/studios/', permanent=True)),
 
 
-    path('admin/applications/', studios_views.admin_applications, name='admin_applications'),
-    path('admin/applications/<int:pk>/change-status/', studios_views.change_application_status, name='change_application_status'),
-    path('admin/categories/', studios_views.manage_categories, name='manage_categories'),
-    path('admin/categories/<int:pk>/delete/', studios_views.delete_category, name='delete_category'),
-    path('admin/categories/add/', studios_views.add_category, name='add_category'),
+    path('superadmin/applications/', studios_views.admin_applications, name='admin_applications'),
+    path('superadmin/applications/<int:pk>/change-status/', studios_views.change_application_status, name='change_application_status'),
+    path('superadmin/categories/', studios_views.manage_categories, name='manage_categories'),
+    path('superadmin/categories/<int:pk>/delete/', studios_views.delete_category, name='delete_category'),
+    path('superadmin/categories/add/', studios_views.add_category, name='add_category'),
     
     
 ]

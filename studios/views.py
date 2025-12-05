@@ -13,18 +13,38 @@ from django.urls import reverse_lazy
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db import transaction
 import os
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import get_user_model
+from .forms import SignUpForm
+
+
+User = get_user_model()
+
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+
+    def get_success_url(self):
+        user = self.request.user
+        if user.is_staff:
+            return reverse_lazy('admin_applications')
+        else:
+            return reverse_lazy('my_applications')
+
 
 def index(request):
-    return render(
-        request,
-        'index.html',
-    )
+    in_progress_count = Application.objects.filter(status='in_progress').count()
 
-def home(request):
-    return render(
-        request,
-        'base_generic.html'
-    )
+    completed_applications = Application.objects.filter(
+        status='completed'
+    ).order_by('-created_at')[:4]
+
+    context = {
+        'in_progress_count': in_progress_count,
+        'completed_applications': completed_applications,
+    }
+    return render(request, 'index.html', context)
+
+
 def neworder(request):
     return render(
         request,
@@ -37,13 +57,11 @@ def registration(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            
-            Profile.objects.create(user=user, phone_number=form.cleaned_data.get('phone_number'))
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-            return redirect('/')
-        success_url = reverse_lazy('login')
+            if user is not None:
+                login(request, user)
+                return redirect('my_applications')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})

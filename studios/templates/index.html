@@ -1,19 +1,57 @@
+<!-- templates/index.html -->
 {% extends "base_generic.html" %}
+{% block title %}Главная - Design PRO{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<div class="column-item">
-    <p>Hi {{ user.username }}!</p>
-    <form action="{% url 'logout' %}" method="post" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit">Выйти</button>
-    </form>
+<div class="hero-section text-center py-5 mb-5 bg-gradient">
+    <h1 class="text-black">Добро пожаловать в Design PRO</h1>
+    {% if user.is_authenticated %}
+        <p class="">Привет, {{ user.username }}!</p>
+        {% if user.is_staff %}
+            <p class="">Перейдите в <a href="{% url 'admin_applications' %}" class="btn btn-warning">панель администратора</a></p>
+        {% else %}
+            <p class="">Перейдите к <a href="{% url 'my_applications' %}" class="btn btn-outline-light">своим заявкам</a> или <a href="{% url 'create_application' %}" class="btn btn-success">создайте новую</a>.</p>
+        {% endif %}
+    {% else %}
+        <p class="">Авторизуйтесь или зарегистрируйтесь, чтобы создавать заявки на дизайн</p>
+        <a href="{% url 'login' %}" class="btn btn-primary me-2">Войти</a>
+        <a href="{% url 'signup' %}" class="btn btn-secondary">Регистрация</a>
+    {% endif %}
 </div>
+
+
+<div class="alert alert-info text-center mb-4">
+    <strong>В работе:</strong> <span class="badge bg-danger fs-6">{{ in_progress_count }}</span> заявок(ки)
+</div>
+
+
+<h2 class="mb-4">Последние выполненные работы</h2>
+{% if completed_applications %}
+    <div class="row g-4">
+        {% for app in completed_applications %}
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100 shadow-sm application-card">
+                {% if app.image_design %}
+                    <img src="{{ app.image_design.url }}" class="card-img-top application-card-img" alt="Дизайн для {{ app.title }}">
+                {% else %}
+                    <div class="card-img-top application-card-img placeholder-img">
+                        <i class="fas fa-image fa-3x text-muted"></i>
+                    </div>
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ app.title|truncatechars:30 }}</h5>
+                    <p class="card-text flex-grow-1">
+                        <small class="text-muted">Категория: {{ app.category.name }}</small><br>
+                        <small class="text-muted">Дата: {{ app.created_at|date:"d.m.Y" }}</small>
+                    </p>
+                    <span class="badge bg-success mt-auto align-self-start">Выполнено</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% else %}
-<div class="column-item">
-    <p>You are not logged in.</p>
-    <a href="{% url 'login' %}">Log In</a>
-</div>
+    <p class="text-center text-muted">Пока нет выполненных работ для отображения</p>
 {% endif %}
 
 {% endblock %}
