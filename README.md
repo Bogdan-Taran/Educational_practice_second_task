@@ -28,7 +28,7 @@ python3 -m venv .venv
 #Activate venv
 *Win*
 ``` bash
-.venv\Scripts\activate.bat
+.venv\Scripts\activate
 ```
 *Ubuntu*
 ```bash

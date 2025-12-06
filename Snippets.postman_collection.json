@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "5e3479ef-a966-460a-8b6d-ff8bff7ab72c",
+		"name": "Snippets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49393689",
+		"_collection_link": "https://bogdan-taran-9007536.postman.co/workspace/Bogdan-Taran's-Workspace~23f93ff9-704c-4c41-80b3-8e7b29bfe160/collection/49393689-5e3479ef-a966-460a-8b6d-ff8bff7ab72c?action=share&source=collection_link&creator=49393689"
+	},
+	"item": [
+		{
+			"name": "GET request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "POST request",
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GET request single",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GET request text/html",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH language",
+			"request": {
+				"method": "PATCH",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
