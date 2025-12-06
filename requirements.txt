@@ -4,4 +4,4 @@ sqlparse==0.5.3
 tzdata==2025.2
 Pillow==12
 djangorestframework
-pygmentsts
+Pygmentsts
